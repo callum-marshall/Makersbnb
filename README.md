@@ -29,7 +29,7 @@
 
 ## User Stories
 
-# For a MVP &darr;
+For a MVP &darr;
 
 ```
 As a user
@@ -53,7 +53,7 @@ So I can rent a place
 I want to be able to request a space
 ```
 
-#...and beyond &darr;
+...and beyond &darr;
 
 ```
 As a user
