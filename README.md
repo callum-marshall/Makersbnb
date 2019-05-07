@@ -28,6 +28,9 @@
 * Basic payment implementation though Stripe.
 
 ## User Stories
+
+# For a MVP &darr;
+
 ```
 As a user
 So I can view spaces
@@ -37,6 +40,10 @@ As a user
 So I can rent out a space
 I want to be able to list a space
 
+As a user 
+So I can describe my space
+I want to be able to add a description to my listing
+
 As a user
 So I can choose a space
 I want to be able to view spaces
@@ -45,3 +52,26 @@ As a user
 So I can rent a place
 I want to be able to request a space
 ```
+
+#...and beyond &darr;
+
+```
+As a user
+So I can offer more
+I want to be able to list multiple spaces 
+
+As a user 
+So I can manage my rentals
+I want to be able to offer a range of available dates
+
+As a user
+So my space does not get double booked 
+I want only one booking available to one date
+
+As a user
+So I can make clear bookings
+I want to have to confirm my booking 
+```
+
+
+
