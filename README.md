@@ -26,3 +26,22 @@
 * Their request to book a space is denied
 * A ‘chat’ functionality once a space has been booked, allowing users whose space-booking request has been confirmed to chat with the user that owns that space
 * Basic payment implementation though Stripe.
+
+## User Stories
+```
+As a user
+So I can view spaces
+I want to be able to sign up
+
+As a user
+So I can rent out a space
+I want to be able to list a space
+
+As a user
+So I can choose a space
+I want to be able to view spaces
+
+As a user
+So I can rent a place
+I want to be able to request a space
+```
