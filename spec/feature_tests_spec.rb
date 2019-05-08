@@ -19,7 +19,7 @@ end
 
 feature 'authentication' do
   scenario "user can sign in" do
-    User.create(email: 'test@example.com', password: 'password123')
+    #User.create(email: 'test@example.com', password: 'password123')
 
     visit('/')
     click_button('log in')
