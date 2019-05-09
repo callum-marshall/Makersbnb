@@ -1,35 +1,52 @@
 require 'sinatra/base'
 require 'pg'
+require_relative 'database_connection_setup'
+require 'sinatra/flash'
+require './lib/user'
+
 
 class Makersbnb < Sinatra::Base
 
 enable :sessions
+register Sinatra::Flash
 
   get '/' do
     erb :homepage
   end
 
   post '/signup' do
-    session[:email] = params[:email]
-    session[:password] = params[:password]
-    redirect '/listings'
+    user = User.create(email: params[:email], password: params[:password])
+    session[:user_id] = user.id
+    redirect '/'
   end
 
   get '/login' do
     erb :login
   end
 
-  post '/sessions' do
-    result = DatabaseConnection.query("SELECT * FROM users WHERE email = '#{params[:email]}'")
-    user = User.new(result[0]['id'], result[0]['email'], result[0]['password'])
-
-    session[:user_id] = user.id
-    redirect '/listings'
+  post '/login' do
+    user = User.authenticate(email: params[:email], password: params[:password])
+    if user
+      session[:user_id] = user.id
+      redirect '/listings'
+    else
+      flash[:notice] = 'wrong email or password'
+      redirect '/login'
+    end
   end
 
   get '/listings' do
-    "welcome #{session[:email]}!"
+    @user = User.find(session[:user_id])
+    erb :listings
   end
+
+
+  post '/sessions/destroy' do
+    session.clear
+    flash[:notice] = 'you have signed out'
+    redirect '/'
+  end
+
 
   run! if app_file == $0
 end

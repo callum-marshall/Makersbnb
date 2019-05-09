@@ -6,7 +6,8 @@
   </head>
   <body>
 <h1>welcome back to makersbnb</h1>
-<form action="/sessions" method="post">
+<h2><%=flash[:notice]%></h2>     
+<form action="/login" method="post">
 <label for="email">email address</label><br>
 <input type="text" name="email" placeholder="email"><br>
 <label for="password">password</label><br>
