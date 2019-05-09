@@ -40,6 +40,7 @@ register Sinatra::Flash
     erb :listings
   end
 
+
   post '/sessions/destroy' do
     session.clear
     flash[:notice] = 'you have signed out'
