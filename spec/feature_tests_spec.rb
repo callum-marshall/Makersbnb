@@ -10,11 +10,13 @@ end
 feature 'User can sign up' do
   scenario "allows user to sign up" do
     visit('/')
-    fill_in :email, with: 'rspec@test.com'
-    fill_in :password, with: '1234'
-    click_button("submit")
+    within('#signup-form') do
+      fill_in :email, with: 'rspec@test.com'
+      fill_in :password, with: '1234'
+      click_button("submit")
+    end
 
-    expect(page).to have_content 'welcome to makersbnb'
+    expect(page).to have_content 'welcome rspec@test.com!'
   end
 end
 
@@ -23,10 +25,13 @@ feature 'authentication' do
     User.create(email: 'test@example.com', password: 'password123')
 
     visit('/')
-    click_button('log in')
-    fill_in :email, with: 'test@example.com'
-    fill_in :password, with: 'password123'
-    click_button('log in')
+    click_button('login-1')
+
+    within('#login-form') do
+      fill_in :email, with: 'test@example.com'
+      fill_in :password, with: 'password123'
+      click_button('login-2')
+    end
 
     expect(page).to have_content("welcome test@example.com")
   end
