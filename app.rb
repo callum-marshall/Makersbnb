@@ -1,17 +1,22 @@
 require 'sinatra/base'
 require 'pg'
 require_relative 'database_connection_setup'
+require 'sinatra/flash'
+require './lib/user'
+
 
 class Makersbnb < Sinatra::Base
 
 enable :sessions
+register Sinatra::Flash
 
   get '/' do
     erb :homepage
   end
 
   post '/signup' do
-    User.create(email: params[:email], password: params[:password])
+    user = User.create(email: params[:email], password: params[:password])
+    session[:user_id] = user.id
     redirect '/'
   end
 
@@ -19,14 +24,20 @@ enable :sessions
     erb :login
   end
 
-  post '/sessions' do
+  post '/login' do
     user = User.authenticate(email: params[:email], password: params[:password])
-    session[:user_id] = user.id
-    redirect '/listings'
+    if user
+      session[:user_id] = user.id
+      redirect '/listings'
+    else
+      flash[:notice] = 'wrong email'
+      redirect '/login'
+    end
   end
 
   get '/listings' do
-    "welcome #{session[:email]}!"
+    user = User.find(session[:user_id])
+    "welcome #{user.email}!"
   end
 
   run! if app_file == $0

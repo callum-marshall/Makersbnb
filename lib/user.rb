@@ -1,5 +1,6 @@
 require 'pg'
-require_relative 'database_connection'
+require_relative './database_connection'
+require 'bcrypt'
 
 class User
   def self.create(email:, password:)
@@ -11,6 +12,7 @@ class User
 
   def self.authenticate(email:, password:)
     result = DatabaseConnection.query("SELECT * FROM users WHERE email = '#{email}'")
+    return unless result.any?
     User.new(id: result[0]['id'], email: result[0]['email'])
   end
 
@@ -19,6 +21,12 @@ class User
   def initialize(id: , email:)
     @id = id
     @email = email
+  end
+
+  def self.find(id)
+    return nil unless id
+    result = DatabaseConnection.query("SELECT * FROM users WHERE id = '#{id}'")
+    User.new(id: result[0]['id'], email: result[0]['email'])
   end
 
 end
