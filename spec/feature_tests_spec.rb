@@ -39,6 +39,37 @@ feature 'authentication' do
    fill_in(:password, with: 'password123')
    click_button('log in')
    expect(page).not_to have_content 'Welcome, test@example.com'
-   expect(page).to have_content 'wrong email'
+   expect(page).to have_content 'wrong email or password'
  end
+
+ scenario "a user sees an error message if password is wrong" do
+   User.create(email: 'test@example.com', password: 'password123')
+
+  visit '/login'
+  fill_in(:email, with: 'test@example.com')
+  fill_in(:password, with: 'wrongpassword')
+  click_button('log in')
+  expect(page).not_to have_content 'Welcome, test@example.com'
+  expect(page).to have_content 'wrong email or password'
+ end
+
+ scenario 'a user can sign out' do
+   User.create(email: 'test@example.com', password: 'password123')
+   visit '/login'
+   fill_in :email, with: 'test@example.com'
+   fill_in :password, with: 'password123'
+   click_button('log in')
+   click_button('log out')
+   expect(page).not_to have_content 'Welcome, test@example.com'
+   expect(page).to have_content 'you have signed out'
+ end
+
+ # scenario 'a user cant sign up with empty details' do
+ #   visit '/'
+ #   click_button('sign up')
+ #   click_button('log in')
+ #   click_button('log in')
+ #   expect()
+
+
 end
