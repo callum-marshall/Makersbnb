@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+  <head>
+    <meta charset="utf-8">
+    <title>welcome back to makersbnb</title>
+  </head>
+  <body>
+<h1>welcome back to makersbnb</h1>
+<h2><%=flash[:notice]%></h2>     
+<form action="/login" method="post">
+<label for="email">email address</label><br>
+<input type="text" name="email" placeholder="email"><br>
+<label for="password">password</label><br>
+<input type="password" name="password" placeholder="password"><br>
+<input type="submit" name="log in" value="log in"><br>
+</form>
+  </body>
+</html>

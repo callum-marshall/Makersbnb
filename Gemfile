@@ -4,6 +4,7 @@ source "https://rubygems.org"
 
 ruby '2.6.0'
 
+gem 'bcrypt'
 gem 'capybara'
 gem 'pg'
 gem 'rspec'
@@ -13,6 +14,7 @@ gem 'simplecov-console', require: false
 gem 'sinatra'
 gem 'activerecord'
 gem 'standalone_migrations'
+gem "sinatra-flash"
 
 git_source(:github) {|repo_name| "https://github.com/#{repo_name}" }
 

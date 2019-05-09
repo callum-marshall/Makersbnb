@@ -1,17 +1,22 @@
 <!DOCTYPE html>
+
 <html lang="en" dir="ltr">
   <head>
     <meta charset="utf-8">
     <title>welcome to makersbnb</title>
   </head>
   <body>
-<h1>welcome to makersbnb</h1>
-<form action="/signup" method="post">
-<label for="email">email address</label><br>
-<input type="text" name="email" placeholder="email"><br>
-<label for="password">password</label><br>
-<input type="password" name="password" placeholder="password"><br>
-<input type="submit" name="submit" value="sign up">
-</form>
+    <h2><%=flash[:notice]%></h2>
+    <h1>welcome to makersbnb</h1>
+    <form action="/signup" method="post">
+      <label for="email">email address</label><br>
+      <input type="text" name="email" placeholder="email" ><br>
+      <label for="password">password</label><br>
+      <input type="password" name="password" placeholder="password" ><br>
+      <input type="submit" name="submit" value="sign up"><br>
+    </form>
+    <form action="/login" method="get">
+      <input type="submit" name="log in" value="log in">
+    </form>
   </body>
 </html>
