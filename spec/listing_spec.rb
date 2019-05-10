@@ -17,13 +17,13 @@ describe Listing do
 
   describe '.all' do
     it "returns a list of listings" do
-      listing1 = Listing.create(owner_id: 666, name: 'test_devil', description: 'devil_description', price: 12.00)
-      listing2 = Listing.create(owner_id: 007, name: 'test_bond', description: 'bond_description', price: 20.00)
-
+      listing1 = Listing.create(owner_id: 111, name: 'test_1', description: '1_description', price: 10.00)
+      listing2 = Listing.create(owner_id: 222, name: 'test_2', description: '2_description', price: 20.00)
       listings = Listing.all
 
-      expect(listings[0].owner_id).to eq "666"
-
+      expect(listings[0]).to be_a Listing
+      expect(listings[1]).to be_a Listing
+      expect(listings.length).to eq 2
     end
   end
 
