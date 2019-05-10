@@ -42,7 +42,9 @@ register Sinatra::Flash
     erb :listings
   end
 
-  
+  post 'booking/new' do
+    Booking.create(listing_id: params[:listing_id], check_in_date: params[:check_in_date], check_out_date: params[:check_out_date], booker_id: params[:booker_id])
+  end
 
   get '/listings/new' do
 

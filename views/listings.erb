@@ -13,7 +13,7 @@
       <input type="submit" value="log out">
     </form>
 
-    <form action="/listings/new" method="get">
+    <form action="/listings/new" method="">
       <input type="submit" value="create listing">
     </form>
 
@@ -25,6 +25,14 @@
             <li><%= listing.price %></li>
             <li><%= listing.description %></li>
           </ul>
+
+            <form action="/booking/new" method="">
+              <input type="date" placeholder="start date">
+              <input type="date" placeholder="end date">
+              <input value="<%= listing.id %>" style ="display:none">
+              <input type="submit" value="book">
+            </form>
+
         <% end %>
 
     </div>
