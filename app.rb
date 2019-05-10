@@ -18,7 +18,7 @@ register Sinatra::Flash
   post '/signup' do
     user = User.create(email: params[:email], password: params[:password])
     session[:user_id] = user.id
-    redirect '/'
+    redirect '/listings'
   end
 
   get '/login' do
