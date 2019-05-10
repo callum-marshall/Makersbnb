@@ -4,6 +4,7 @@ require_relative 'database_connection_setup'
 require 'sinatra/flash'
 require './lib/user'
 require './lib/listing'
+require './lib/booking'
 
 
 class Makersbnb < Sinatra::Base
@@ -42,8 +43,19 @@ register Sinatra::Flash
     erb :listings
   end
 
-  post 'booking/new' do
-    Booking.create(listing_id: params[:listing_id], check_in_date: params[:check_in_date], check_out_date: params[:check_out_date], booker_id: params[:booker_id])
+  post '/booking/new' do
+    booking = Booking.create(listing_id: params[:listing_id], check_in_date: params[:check_in_date], check_out_date: params[:check_out_date], booker_id: session[:user_id])
+    session[:booking_id] = booking.id
+    redirect '/booking/confirmed'
+  end
+
+  get '/booking/confirmed' do
+    @booking = Booking.find(session[:booking_id])
+    listing_id = @booking.listing_id
+    @listing = Listing.find(listing_id)
+
+    @bookings = Booking.find_all_requests(session[:user_id])
+    erb :booking_request_confirmed
   end
 
   get '/listings/new' do

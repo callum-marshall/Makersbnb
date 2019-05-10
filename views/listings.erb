@@ -26,10 +26,10 @@
             <li><%= listing.description %></li>
           </ul>
 
-            <form action="/booking/new" method="">
-              <input type="date" placeholder="start date">
-              <input type="date" placeholder="end date">
-              <input value="<%= listing.id %>" style ="display:none">
+            <form action="/booking/new" method="post">
+              <input type="date" placeholder="start date" name="check_in_date">
+              <input type="date" placeholder="end date" name="check_out_date">
+              <input value="<%= listing.id %>" style ="display:none" name="listing_id">
               <input type="submit" value="book">
             </form>
 
