@@ -42,16 +42,17 @@ register Sinatra::Flash
     erb :listings
   end
 
-  get 'listings/new' do
+  
+
+  get '/listings/new' do
 
     erb :make_listing
   end
 
-  post 'listings/new' do
+  post '/listings/new/:id' do
     listing = Listing.create(owner_id: session[:user_id], name: params[:name], description: params[:description], price: params[:price])
     redirect '/listings'
   end
-
 
   post '/sessions/destroy' do
     session.clear

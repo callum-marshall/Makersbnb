@@ -1,6 +1,11 @@
 require 'user'
 require 'listing'
 
+def signup
+  User.create(email: 'test@example.com', password: 'password123')
+  visit '/login'
+end
+
 def signup_and_login
   User.create(email: 'test@example.com', password: 'password123')
   visit '/login'

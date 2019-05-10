@@ -28,20 +28,16 @@ feature 'Authentication' do
   end
 
   scenario "a user sees an error message if email is wrong" do
-    User.create(email: 'test@example.com', password: 'password123')
-
-   visit '/login'
-   fill_in(:email, with: 'wrong@wrong.wrong')
-   fill_in(:password, with: 'password123')
-   click_button('log in')
-   expect(page).not_to have_content 'Welcome, test@example.com'
-   expect(page).to have_content 'wrong email or password'
+    signup
+    fill_in(:email, with: 'wrong@wrong.wrong')
+    fill_in(:password, with: 'password123')
+    click_button('log in')
+    expect(page).not_to have_content 'Welcome, test@example.com'
+    expect(page).to have_content 'wrong email or password'
  end
 
  scenario "a user sees an error message if password is wrong" do
-    User.create(email: 'test@example.com', password: 'password123')
-
-    visit '/login'
+    signup
     fill_in(:email, with: 'test@example.com')
     fill_in(:password, with: 'wrongpassword')
     click_button('log in')
@@ -76,13 +72,10 @@ feature 'Creating a listing' do
     fill_in(:name, with: 'test_name')
     fill_in(:description, with: 'test_description')
     fill_in(:price, with: 12.00)
-    page.select '1', from: 'bedrooms'
     click_button('create listing')
     expect(page).to have_content 'test_name'
     expect(page).to have_content 'test_description'
     expect(page).to have_content '$12.00'
-    # user makes a listing on a create listing page
-    # user can view listing on view listings page
   end
 end
 
