@@ -1,4 +1,5 @@
 require 'spec_helper'
+require 'test_helpers'
 
 feature 'Viewing the homepage' do
   scenario "allows user to visit homepage" do
@@ -18,16 +19,9 @@ feature 'User can sign up' do
   end
 end
 
-feature 'authentication' do
+feature 'Authentication' do
   scenario "user can log in" do
-    User.create(email: 'test@example.com', password: 'password123')
-
-    visit('/')
-    click_button('log in')
-    fill_in :email, with: 'test@example.com'
-    fill_in :password, with: 'password123'
-    click_button('log in')
-
+    signup_and_login
     expect(page).to have_content("welcome test@example.com")
   end
 
@@ -43,26 +37,41 @@ feature 'authentication' do
  end
 
  scenario "a user sees an error message if password is wrong" do
-   User.create(email: 'test@example.com', password: 'password123')
+    User.create(email: 'test@example.com', password: 'password123')
 
-  visit '/login'
-  fill_in(:email, with: 'test@example.com')
-  fill_in(:password, with: 'wrongpassword')
-  click_button('log in')
-  expect(page).not_to have_content 'Welcome, test@example.com'
-  expect(page).to have_content 'wrong email or password'
+    visit '/login'
+    fill_in(:email, with: 'test@example.com')
+    fill_in(:password, with: 'wrongpassword')
+    click_button('log in')
+    expect(page).not_to have_content 'Welcome, test@example.com'
+    expect(page).to have_content 'wrong email or password'
  end
+end
 
- scenario 'a user can sign out' do
-   User.create(email: 'test@example.com', password: 'password123')
-   visit '/login'
-   fill_in :email, with: 'test@example.com'
-   fill_in :password, with: 'password123'
-   click_button('log in')
-   click_button('log out')
-   expect(page).not_to have_content 'Welcome, test@example.com'
-   expect(page).to have_content 'you have signed out'
- end
+feature 'Signing out' do
+  scenario 'a user can sign out' do
+    signup_and_login
+    click_button('log out')
+    expect(page).not_to have_content 'Welcome, test@example.com'
+    expect(page).to have_content 'you have signed out'
+  end
+end
+
+xfeature 'Viewing listings' do
+  scenario 'a user can see a list of spaces after logging in' do
+    signup_and_login
+    expect(page).to have_content 'listings'
+  end
+end
+
+xfeature 'Creating a listing' do
+  scenario 'a user can create a listing' do
+    signup_and_login
+
+    # user makes a listing on a create listing page
+    # user can view listing on view listings page
+  end
+end
 
  # scenario 'a user cant sign up with empty details' do
  #   visit '/'
@@ -70,6 +79,3 @@ feature 'authentication' do
  #   click_button('log in')
  #   click_button('log in')
  #   expect()
-
-
-end
