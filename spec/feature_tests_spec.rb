@@ -57,17 +57,28 @@ feature 'Signing out' do
   end
 end
 
-xfeature 'Viewing listings' do
+feature 'Viewing listings' do
   scenario 'a user can see a list of spaces after logging in' do
+    populate_listings
     signup_and_login
-    expect(page).to have_content 'listings'
+    expect(page).to have_content 'test_5'
+    expect(page).to have_content '2_description'
+    expect(page).to have_content '$30.00'
   end
 end
 
-xfeature 'Creating a listing' do
+feature 'Creating a listing' do
   scenario 'a user can create a listing' do
     signup_and_login
-
+    click_button('create listing')
+    fill_in(:name, with: 'test_name')
+    fill_in(:description, with: 'test_description')
+    fill_in(:price, with: 12.00)
+    page.select '1', from: 'bedrooms'
+    click_button('create listing')
+    expect(page).to have_content 'test_name'
+    expect(page).to have_content 'test_description'
+    expect(page).to have_content '$12.00'
     # user makes a listing on a create listing page
     # user can view listing on view listings page
   end

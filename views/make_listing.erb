@@ -15,14 +15,14 @@
   <body>
     <h1>List your property on casa de makersbnb</h1>
     <br>
-    <form action="/makelisting" method="post">
-      <input type="text" name="owner" placeholder="owner" style="width:200px">
+    <form action="/listings/new" method="post">
+      <!-- <input type="text" name="owner" placeholder="owner" style="width:200px">
       <br>
       <input type="text" name="date" placeholder="YYYYMMDD" style="width:200px">
+      <br> -->
+      <input type="text" name="name" placeholder="the title of your listing" style="width:200px">
       <br>
-      <input type="text" name="name" placeholder="Bob Hoskins" style="width:200px">
-      <br>
-      <input type="text" name="description" placeholder="whats it like" style="height:200px;width:200px">
+      <input type="text" name="description" placeholder="what's it like" style="height:200px;width:200px">
       <br>
       <input type="text" name="price" placeholder="£" style="width:200px">
       <br>
@@ -31,9 +31,8 @@
         <option value="2">2 bedrooms</option>
         <option value="3">3 bedrooms</option>
         <option value="4">4 bedrooms</option>
-
       </select>
-
+      <input type="submit" value="create listing">
     </form>
 
   </body>

@@ -3,6 +3,7 @@ require 'pg'
 require_relative 'database_connection_setup'
 require 'sinatra/flash'
 require './lib/user'
+require './lib/listing'
 
 
 class Makersbnb < Sinatra::Base
@@ -37,7 +38,18 @@ register Sinatra::Flash
 
   get '/listings' do
     @user = User.find(session[:user_id])
+    @listings = Listing.all
     erb :listings
+  end
+
+  get 'listings/new' do
+
+    erb :make_listing
+  end
+
+  post 'listings/new' do
+    listing = Listing.create(owner_id: session[:user_id], name: params[:name], description: params[:description], price: params[:price])
+    redirect '/listings'
   end
 
 

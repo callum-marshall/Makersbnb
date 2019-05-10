@@ -1,5 +1,32 @@
-<p>welcome <%=@user.email%>!</p>
 
-<form action="/sessions/destroy" method="post">
-  <input type="submit" value="log out">
-</form>
+
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+  <head>
+    <meta charset="utf-8">
+    <title></title>
+  </head>
+  <body>
+    <p>welcome <%=@user.email%>!</p>
+
+    <form action="/sessions/destroy" method="post">
+      <input type="submit" value="log out">
+    </form>
+
+    <form action="/listings/new" method="get">
+      <input type="submit" value="create listing">
+    </form>
+
+    <div id="list">
+
+        <% @listings.each do |listing| %>
+          <ul>
+            <li><%= listing.name %></li>
+            <li><%= listing.price %></li>
+            <li><%= listing.description %></li>
+          </ul>
+        <% end %>
+
+    </div>
+  </body>
+</html>
