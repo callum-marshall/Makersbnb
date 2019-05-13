@@ -1,4 +1,4 @@
-require 'pg'
+ogrequire 'pg'
 require_relative './database_connection'
 
 # Booking.create(listing_id: params[:listing_id],
